@@ -1,29 +1,3 @@
-variable "vcd_user" {
-  description = "Cloud Director Username"
-  type        = string
-  sensitive   = true
-}
-variable "vcd_pass" {
-  description = "Cloud Director Password"
-  type        = string
-  sensitive   = true
-}
-
-variable "vcd_url" {
-  description = "Cloud Director URL"
-  default     = "https://us1.rsvc.rackspace.com/api"
-}
-
-variable "max_retry_timeout" {
-  type        = number
-  default     = 90
-}
-
-variable "allow_unverified_ssl" {
-  type        = bool
-  default     = true
-}
-
 variable "vdc_org_name" {
   type        = string
   description = "Cloud Director Organization Name"
