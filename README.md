@@ -71,11 +71,11 @@ The Terraform code example for the main.tf file is below:
 module "vapp_vm" {
   source = "github.com/global-vmware/vcd_vapp_vm.git?ref=v1.1.0"
   
-  vdc_org_name                      = "US1-VDC-ORG-NAME"
-  vdc_group_name                    = "US1-VDC-GRP-NAME"
-  vdc_name                          = "US1-VDC-NAME"
-  vcd_edgegateway_name              = "US1-VDC-EDGE-NAME"
-  catalog_name                      = "US1-CATALOG-NAME"
+  vdc_org_name                      = "<US1-VDC-ORG-NAME>"
+  vdc_group_name                    = "<US1-VDC-GRP-NAME>"
+  vdc_name                          = "<US1-VDC-NAME>"
+  vcd_edgegateway_name              = "<US1-VDC-EDGE-NAME>"
+  catalog_name                      = "<US1-CATALOG-NAME>"
   catalog_template_name             = "Windows Server 2019"
   vapp_org_network_name             = "US1-Segment-01"
   network_cidr                      = "192.168.0.0/24" 
