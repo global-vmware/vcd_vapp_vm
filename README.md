@@ -78,7 +78,8 @@ module "vapp_vm" {
   catalog_name                      = "<US1-CATALOG-NAME>"
   catalog_template_name             = "Windows Server 2019"
   vapp_org_network_name             = "US1-Segment-01"
-  network_cidr                      = "192.168.1.0/24" 
+  network_cidr                      = "192.168.1.0/24"
+  network_ip_allocation_mode        = "POOL" 
 
   vm_count                          = 2
 
@@ -90,9 +91,10 @@ module "vapp_vm" {
   vm_computer_name_app_name         = "myapp"
   vm_computer_name_role             = "web"
   
-  vm_metadata_role                  = "Web Server"
-  vm_metadata_os                    = "Windows 2019"
-  vm_metadata_version               = "1.0"
   vm_metadata_cost_center           = "IT Department-1001"
+  vm_metadata_os                    = "Windows 2019"
+  vm_metadata_role                  = "Web Server"
+  vm_metadata_version               = "1.0"
+  
 }
 ```
