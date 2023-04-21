@@ -58,8 +58,6 @@ This Terraform module creates a vApp and VM in an existing VMware Cloud Director
 
 | Name | Description |
 |------|-------------|
-| Name                 | Description                                                      |
-|----------------------|------------------------------------------------------------------|
 | vm_names | An array of formatted VM names. |
 | vm_computer_names | An array of formatted computer names for each VM. |
 | vm_metadata_os | The operating system specified in the `vm_metadata_os` variable. |
