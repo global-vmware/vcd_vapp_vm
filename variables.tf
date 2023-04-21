@@ -117,9 +117,9 @@ variable "network_cidr" {
   default = "192.168.0.0/24"
 }
 
-variable "vm_metadata_role" {
+variable "vm_metadata_cost_center" {
   type = string
-  default = "Web Server"
+  default = "1001"
 }
 
 variable "vm_metadata_os" {
@@ -127,14 +127,14 @@ variable "vm_metadata_os" {
   default = "Windows 2022"
 }
 
+variable "vm_metadata_role" {
+  type = string
+  default = "Web Server"
+}
+
 variable "vm_metadata_version" {
   type = string
   default = "v1.0"
-}
-
-variable "vm_metadata_cost_center" {
-  type = string
-  default = "1001"
 }
 
 variable "vm_metadata_type_string_value" {

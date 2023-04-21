@@ -10,42 +10,43 @@ terraform {
 }
 
 data "vcd_vdc_group" "vdc_group" {
-  name = var.vdc_group_name
+  name              = var.vdc_group_name
 }
 
 data "vcd_nsxt_edgegateway" "edge_gateway" {
-  org      = var.vdc_org_name
-  owner_id = data.vcd_vdc_group.vdc_group.id
-  name = var.vcd_edge_name
+  org               = var.vdc_org_name
+  owner_id          = data.vcd_vdc_group.vdc_group.id
+  name              = var.vcd_edge_name
 }
 
 data "vcd_network_routed_v2" "segment" {
-  edge_gateway_id = data.vcd_nsxt_edgegateway.edge_gateway.id
-  name            = var.vapp_org_network_name
+  edge_gateway_id   = data.vcd_nsxt_edgegateway.edge_gateway.id
+  name              = var.vapp_org_network_name
 }
 
 data "vcd_vm_sizing_policy" "sizing_policy" {
-  name = var.vm_sizing_policy_name
+  name              = var.vm_sizing_policy_name
 }
 
 data "vcd_catalog" "catalog" {
-  name = var.catalog_name
+  name              = var.catalog_name
 }
 
 data "vcd_catalog_vapp_template" "template" {
-  catalog_id    = data.vcd_catalog.catalog.id
-  name          = var.catalog_template_name
+  catalog_id      = data.vcd_catalog.catalog.id
+  name            = var.catalog_template_name
 }
 
+
 resource "vcd_vapp" "vapp" {
-  name  = var.vapp_name
-  org   = var.vdc_org_name
-  vdc   = var.vdc_name
+  name                    = var.vapp_name
+  org                     = var.vdc_org_name
+  vdc                     = var.vdc_name
 }
 
 resource "vcd_vapp_org_network" "vappOrgNet" {
-  vapp_name         = "${vcd_vapp.vapp.name}"
-  org_network_name  = data.vcd_network_routed_v2.segment.name
+  vapp_name               = "${vcd_vapp.vapp.name}"
+  org_network_name        = data.vcd_network_routed_v2.segment.name
 }
 
 resource "vcd_vapp_vm" "vm" {
@@ -61,28 +62,38 @@ resource "vcd_vapp_vm" "vm" {
   count                   = var.vm_count
 
   metadata_entry {
-  key = "OS"
-  value = var.vm_metadata_os
-  type = var.vm_metadata_type_string_value
-  user_access = var.vm_metadata_user_access_readwrite
-  is_system = var.vm_metadata_is_system_false
+  key                     = "Cost Center"
+  value                   = var.vm_metadata_cost_center
+  type                    = var.vm_metadata_type_string_value
+  user_access             = var.vm_metadata_user_access_readwrite
+  is_system               = var.vm_metadata_is_system_false
+  }
+  
+  metadata_entry {
+  key                     = "OS"
+  value                   = var.vm_metadata_os
+  type                    = var.vm_metadata_type_string_value
+  user_access             = var.vm_metadata_user_access_readwrite
+  is_system               = var.vm_metadata_is_system_false
   }
 
   metadata_entry {
-  key = "Version"
-  value = var.vm_metadata_version
-  type = var.vm_metadata_type_string_value
-  user_access = var.vm_metadata_user_access_readwrite
-  is_system = var.vm_metadata_is_system_false
+  key                     = "Role"
+  value                   = var.vm_metadata_role
+  type                    = var.vm_metadata_type_string_value
+  user_access             = var.vm_metadata_user_access_readwrite
+  is_system               = var.vm_metadata_is_system_false
   }
 
   metadata_entry {
-  key = "Cost Center"
-  value = var.vm_metadata_cost_center
-  type = var.vm_metadata_type_string_value
-  user_access = var.vm_metadata_user_access_readwrite
-  is_system = var.vm_metadata_is_system_false
+  key                     = "Version"
+  value                   = var.vm_metadata_version
+  type                    = var.vm_metadata_type_string_value
+  user_access             = var.vm_metadata_user_access_readwrite
+  is_system               = var.vm_metadata_is_system_false
   }
+
+  
 
 
   network {
@@ -94,6 +105,6 @@ resource "vcd_vapp_vm" "vm" {
       is_primary          = true
   }
 
-  depends_on = [vcd_vapp.vapp]
+  depends_on              = [vcd_vapp.vapp]
 }
 

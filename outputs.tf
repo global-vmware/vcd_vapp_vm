@@ -10,16 +10,20 @@ output "vm_count" {
   value = var.vm_count
 }
 
+output "vm_metadata_cost_center" {
+  value = var.vm_metadata_cost_center
+}
+
 output "vm_metadata_os" {
   value = var.vm_metadata_os
 }
 
-output "vm_metadata_version" {
-  value = var.vm_metadata_version
+output "vm_metadata_role" {
+  value = var.vm_metadata_role
 }
 
-output "vm_metadata_cost_center" {
-  value = var.vm_metadata_cost_center
+output "vm_metadata_version" {
+  value = var.vm_metadata_version
 }
 
 output "vm_sizing_policy_name" {
