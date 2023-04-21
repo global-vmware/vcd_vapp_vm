@@ -18,15 +18,10 @@ This Terraform module creates a vApp and VM in an existing VMware Cloud Director
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|----------|
-| vcd_user | Cloud Director Username | string | | yes |
-| vcd_pass | Cloud Director Password | string | | yes |
-| vcd_url | Cloud Director URL | string | | no |
-| max_retry_timeout | Maximum time to retry a failed API call (in seconds)  | number | 90 | no |
-| allow_unverified_ssl | Flag to enable or disable SSL certificate verification | bool  | true | no |
-| vdc_org_name | Cloud Director Organization Name | string | | no |
-| vdc_group_name | Cloud Director Datacenter Group Name | string | | no |
-| vdc_name | Cloud Director VDC Name | string | | no |
-| vcd_edgegateway_name | Cloud Director Edge Name | string | | no |
+| vdc_org_name | Name of the Data Center Group Organization | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name>"` | no |
+| vdc_group_name | Name of the Data Center Group | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name> <datacenter group>"` | no |
+| vdc_name | Cloud Director VDC Name | string | `"Virtual Data Center Name Format: <Account_Number>-<Region>-<Segment Name>"` | no |
+| vcd_edgegateway_name | Name of the Data Center Group Edge Gateway | string | `"Edge Gateway Name Format: <Account_Number>-<Region>-<Edge_GW_Identifier>-<edge>"` | no |
 | vm_sizing_policy_name | Cloud Director VM Sizing Policy Name | string | gp4.16  | no |
 | vapp_org_network_name | Cloud Director Vapp Organization Network Name | string | US1-Segment-01 | no |
 | catalog_name | Cloud Director Catalog Name | string | 1338829-US1-catalog | no |
