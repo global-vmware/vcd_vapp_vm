@@ -101,7 +101,7 @@ resource "vcd_vapp_vm" "vm" {
       adapter_type        = var.network_adapter_type
       name                = var.vapp_org_network_name
       ip_allocation_mode  = var.network_ip_allocation_mode
-      ip                  = "${cidrhost(var.network_cidr, count.index + 50)}"
+      ip                  = "${cidrhost(var.network_cidr, count.index + 10)}"
       is_primary          = true
   }
 
