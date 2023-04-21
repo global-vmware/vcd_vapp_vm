@@ -32,7 +32,7 @@ output "vm_sizing_policy_name" {
 
 output "vm_networks" {
     value = [for i in range(var.vm_count) : {
-        ip_address = cidrhost(var.network_cidr, i+50)
+        ip_address = cidrhost(var.network_cidr, i+10)
         network_name = var.vapp_org_network_name
     }]
 }
