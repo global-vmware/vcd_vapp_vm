@@ -6,6 +6,10 @@ output "vm_computer_names" {
     value = [for i in range(var.vm_count) : format("%s-%s-%s%02d", var.computer_name_environment, var.vm_computer_name_app_name, var.vm_computer_name_role, i+1)]
 }
 
+output "vm_count" {
+  value = var.vm_count
+}
+
 output "vm_metadata_os" {
   value = var.vm_metadata_os
 }
