@@ -51,7 +51,7 @@ resource "vcd_vapp_org_network" "vappOrgNet" {
 resource "vcd_vapp_vm" "vm" {
   vapp_name               = "${vcd_vapp.vapp.name}"
   name                    = "${format("${var.vm_name_environment} ${var.vm_app_name} ${var.vm_app_role} %02d", count.index + 1)}"
-  computer_name           = "${format("${var.computer_name_environment}-${var.vm_computer_name_app_name}-${var.vm_computer_name_role}%02d", count.index + 1)}"
+  computer_name           = "${format("${var.vm_computer_name_environment}-${var.vm_computer_name_app_name}-${var.vm_computer_name_role}%02d", count.index + 1)}"
   vapp_template_id        = data.vcd_catalog_vapp_template.template.id
   cpu_hot_add_enabled     = var.vm_cpu_hot_add_enabled
   memory_hot_add_enabled  = var.vm_memory_hot_add_enabled

@@ -55,12 +55,12 @@ variable "vm_sizing_policy_name" {
 
 variable "vapp_org_network_name" {
   type = string
-  default = "US1-Segment-01"
+  default = "Segment-01"
 }
 
 variable "catalog_name" {
   type = string
-  default = "1338829-US1-catalog"
+  default = ""
 }
 
 variable "catalog_template_name" {
@@ -88,7 +88,7 @@ variable "vm_app_role" {
   default = "Web"
 }
 
-variable "computer_name_environment" {
+variable "vm_computer_name_environment" {
   type = string
   default = "pd"
 }
