@@ -69,21 +69,30 @@ The Terraform code example for the main.tf file is below:
 
 ```terraform
 module "vapp_vm" {
-  source = "github.com/your-github-username/terraform-vcd-deployment"
+  source = "github.com/global-vmware/vcd_vapp_vm.git?ref=v1.1.0"
   
   vdc_org_name                      = "US1-VDC-ORG-NAME"
   vdc_group_name                    = "US1-VDC-GRP-NAME"
   vdc_name                          = "US1-VDC-NAME"
   vcd_edgegateway_name              = "US1-VDC-EDGE-NAME"
   catalog_name                      = "US1-CATALOG-NAME"
-
-  vapp_name                         = "My Development Web Application"
   catalog_template_name             = "Windows Server 2019"
-  vm_name_environment               = "Dev"
-  vm_computer_name_environment      = "dv"
-  vm_count                          = 1
-  network_cidr                      = "192.168.1.0/24"
-  vm_metadata_os                    = "Windows 2019"
-}
+  vapp_org_network_name             = "US1-Segment-01"
+  network_cidr                      = "192.168.0.0/24" 
 
+  vm_count                          = 2
+
+  vapp_name                         = "My Development Application"
+  vm_name_environment               = "Dev"
+  vm_app_name                       = "MyApp"
+  vm_app_role                       = "Web Server"
+  vm_computer_name_environment      = "dv"
+  vm_computer_name_app_name         = "myapp"
+  vm_computer_name_role             = "web"
+  
+  vm_metadata_role                  = "Web Server"
+  vm_metadata_os                    = "Windows 2019"
+  vm_metadata_version               = "1.0"
+  vm_metadata_cost_center           = "IT Department-1001"
+}
 ```
