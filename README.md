@@ -39,7 +39,7 @@ This Terraform module will deploy a vApp and "X" number of Virtual Machines into
 | vm_min_cpu | Minimum number of CPUs for each VM | number | 4 | no |
 | network_type | Type of network to be created (org or vapp) | string | org | no |
 | network_adapter_type | Type of network adapter for each VM | string | VMXNET3 | no |
-| network_ip_allocation_mode | IP address allocation mode for each VM | string | POOL  | no |
+| network_ip_allocation_mode | IP address allocation mode for each VM | string | MANUAL  | no |
 | network_cidr | CIDR block for the network | string | 192.168.0.0/24 | no |
 | vm_metadata_role | Role of the VM | string | Web Server | no |
 | vm_metadata_os | Operating system for the virtual machine metadata | string | Windows 2022 | No |
@@ -79,7 +79,7 @@ module "vapp_vm" {
   catalog_template_name             = "Windows Server 2019"
   vapp_org_network_name             = "US1-Segment-01"
   network_cidr                      = "192.168.1.0/24"
-  network_ip_allocation_mode        = "POOL" 
+  network_ip_allocation_mode        = "MANUAL" 
 
   vm_count                          = 2
 
