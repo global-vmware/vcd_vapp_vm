@@ -16,7 +16,7 @@ data "vcd_vdc_group" "vdc_group" {
 data "vcd_nsxt_edgegateway" "edge_gateway" {
   org      = var.vdc_org_name
   owner_id = data.vcd_vdc_group.vdc_group.id
-  name = var.vcd_edgegateway_name
+  name = var.vcd_edge_name
 }
 
 data "vcd_network_routed_v2" "segment" {

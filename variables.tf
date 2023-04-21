@@ -42,7 +42,7 @@ variable "vdc_name" {
   default     = ""
 }
 
-variable "vcd_edgegateway_name" {
+variable "vcd_edge_name" {
   type        = string
   description = "Cloud Director Edge Name"
   default     = ""
