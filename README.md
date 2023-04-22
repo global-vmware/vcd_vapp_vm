@@ -41,11 +41,14 @@ This Terraform module will deploy a vApp and "X" number of Virtual Machines into
 | network_adapter_type | Type of network adapter for each VM | string | VMXNET3 | no |
 | network_ip_allocation_mode | IP address allocation mode for each VM | string | MANUAL  | no |
 | network_cidr | CIDR block for the network | string | 192.168.0.0/24 | no |
-| vm_metadata_role | Role of the VM | string | Web Server | no |
-| vm_metadata_os | Operating system for the virtual machine metadata | string | Windows 2022 | No |
-| vm_metadata_version | Version of the virtual machine metadata | string | v1.0 | No |
-| vm_metadata_cost_center | Cost center for the virtual machine metadata | string | 1001 | No |
-| vm_metadata_type_string_value | Type of string value for the virtual machine metadata | string | MetadataStringValue | No |
+| vm_metadata_key_01 | Key for virtual machine metadata field | string | "Cost Center" | no |
+| vm_metadata_value_01 | Value for virtual machine metadata field | string | "1001" | no |
+| vm_metadata_key_02 | Key for virtual machine metadata field | string | "Operating System" | no |
+| vm_metadata_value_02 | Value for virtual machine metadata field | string | "Ubuntu 22.04" | no |
+| vm_metadata_key_03 | Key for virtual machine metadata field | string | "Role" | no |
+| vm_metadata_value_03 | Value for virtual machine metadata field | string | "Web Server" | no |
+| vm_metadata_key_04 | Key for virtual machine metadata field | string | "Version" | no |
+| vm_metadata_value_04 | Value for virtual machine metadata field | string | "v1.0" | no |
 | vm_metadata_user_access_readwrite | Access level for the virtual machine metadata | string | READWRITE | No |
 | vm_metadata_is_system_false | Specifies if the metadata is system-generated or not | bool | false | No |
 
@@ -55,12 +58,16 @@ This Terraform module will deploy a vApp and "X" number of Virtual Machines into
 |------|-------------|
 | vm_names | An array of formatted VM names. |
 | vm_computer_names | An array of formatted computer names for each VM. |
-| vm_metadata_os | The operating system specified in the `vm_metadata_os` variable. |
-| vm_metadata_version | The version specified in the `vm_metadata_version` variable. |
-| vm_metadata_cost_center | The cost center specified in the `vm_metadata_cost_center` variable. |
 | vm_sizing_policy_name | The name of the sizing policy retrieved from the VCD instance. |
 | vm_networks | An array of network information for each VM. |
-
+| vm_metadata_key_01 | The key for metadata value 01. |
+| vm_metadata_value_01 | The value for metadata key 01. |
+| vm_metadata_key_02 | The key for metadata value 02. |
+| vm_metadata_value_02 | The value for metadata key 02. |
+| vm_metadata_key_03 | The key for metadata value 03. |
+| vm_metadata_value_03 | The value for metadata key 03. |
+| vm_metadata_key_04 | The key for metadata value 04. |
+| vm_metadata_value_04 | The value for metadata key 04. |
 
 ## Example Usage
 This is an example of a main.tf file that would use the "github.com/global-vmware/vcd_vapp_vm" Module Source to create a Virtual Application and it's associated Virtual Machines.

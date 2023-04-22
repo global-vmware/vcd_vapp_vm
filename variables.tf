@@ -152,22 +152,42 @@ variable "vm_customization_admin_password" {
   default = ""
 }
 
-variable "vm_metadata_cost_center" {
+variable "vm_metadata_key_01" {
+  type = string
+  default = "Cost Center"
+}
+
+variable "vm_metadata_value_01" {
   type = string
   default = "1001"
 }
 
-variable "vm_metadata_os" {
+variable "vm_metadata_key_02" {
   type = string
-  default = "Windows 2022"
+  default = "Operating System"
 }
 
-variable "vm_metadata_role" {
+variable "vm_metadata_value_02" {
+  type = string
+  default = "Ubuntu 22.04"
+}
+
+variable "vm_metadata_key_03" {
+  type = string
+  default = "Role"
+}
+
+variable "vm_metadata_value_03" {
   type = string
   default = "Web Server"
 }
 
-variable "vm_metadata_version" {
+variable "vm_metadata_key_04" {
+  type = string
+  default = "Version"
+}
+
+variable "vm_metadata_value_04" {
   type = string
   default = "v1.0"
 }
