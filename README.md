@@ -24,7 +24,7 @@ This Terraform module will deploy a vApp and "X" number of Virtual Machines into
 | vcd_edge_name | Name of the Data Center Group Edge Gateway | string | `"Edge Gateway Name Format: <Account_Number>-<Region>-<Edge_GW_Identifier>-<edge>"` | Yes |
 | vm_sizing_policy_name | Cloud Director VM Sizing Policy Name | string | gp4.16  | no |
 | vapp_org_network_name | Cloud Director Vapp Organization Network Name | string | US1-Segment-01 | no |
-| catalog_name | Cloud Director Catalog Name | string | 1338829-US1-catalog | Yes |
+| catalog_name | Cloud Director Catalog Name | string | `"Catalog Name Format: <Account_Number>-<Region>-<catalog>"` | Yes |
 | catalog_template_name | Cloud Director Catalog Template Name | string | Windows Server 2022 | no |
 | vapp_name | Cloud Director Vapp Name | string | My Application | no |
 | vm_name_environment | Environment of the VM | string | Prod | no |
