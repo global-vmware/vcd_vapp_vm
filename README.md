@@ -44,7 +44,7 @@ This Terraform module will deploy a vApp and "X" number of Virtual Machines into
 | vm_metadata_key_01 | Key for virtual machine metadata field | string | "Cost Center" | no |
 | vm_metadata_value_01 | Value for virtual machine metadata field | string | "1001" | no |
 | vm_metadata_key_02 | Key for virtual machine metadata field | string | "Operating System" | no |
-| vm_metadata_value_02 | Value for virtual machine metadata field | string | "Ubuntu 22.04" | no |
+| vm_metadata_value_02 | Value for virtual machine metadata field | string | "Windows Server 2022" | no |
 | vm_metadata_key_03 | Key for virtual machine metadata field | string | "Role" | no |
 | vm_metadata_value_03 | Value for virtual machine metadata field | string | "Web Server" | no |
 | vm_metadata_key_04 | Key for virtual machine metadata field | string | "Version" | no |
