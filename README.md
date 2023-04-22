@@ -18,13 +18,13 @@ This Terraform module will deploy a vApp and "X" number of Virtual Machines into
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|----------|
-| vdc_org_name | Name of the Data Center Group Organization | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name>"` | no |
-| vdc_group_name | Name of the Data Center Group | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name> <datacenter group>"` | no |
-| vdc_name | Cloud Director VDC Name | string | `"Virtual Data Center Name Format: <Account_Number>-<Region>-<Segment Name>"` | no |
-| vcd_edge_name | Name of the Data Center Group Edge Gateway | string | `"Edge Gateway Name Format: <Account_Number>-<Region>-<Edge_GW_Identifier>-<edge>"` | no |
+| vdc_org_name | Name of the Data Center Group Organization | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name>"` | Yes |
+| vdc_group_name | Name of the Data Center Group | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name> <datacenter group>"` | Yes |
+| vdc_name | Cloud Director VDC Name | string | `"Virtual Data Center Name Format: <Account_Number>-<Region>-<Segment Name>"` | Yes |
+| vcd_edge_name | Name of the Data Center Group Edge Gateway | string | `"Edge Gateway Name Format: <Account_Number>-<Region>-<Edge_GW_Identifier>-<edge>"` | Yes |
 | vm_sizing_policy_name | Cloud Director VM Sizing Policy Name | string | gp4.16  | no |
 | vapp_org_network_name | Cloud Director Vapp Organization Network Name | string | US1-Segment-01 | no |
-| catalog_name | Cloud Director Catalog Name | string | 1338829-US1-catalog | no |
+| catalog_name | Cloud Director Catalog Name | string | 1338829-US1-catalog | Yes |
 | catalog_template_name | Cloud Director Catalog Template Name | string | Windows Server 2022 | no |
 | vapp_name | Cloud Director Vapp Name | string | My Application | no |
 | vm_name_environment | Environment of the VM | string | Prod | no |
