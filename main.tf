@@ -105,6 +105,17 @@ resource "vcd_vapp_vm" "vm" {
       is_primary          = true
   }
 
+  customization {
+    force                               = var.vm_customization_force
+    enabled                             = var.vm_customization_enabled
+    change_sid                          = var.vm_customization_change_sid
+    allow_local_admin_password          = var.vm_customization_allow_local_admin_password
+    must_change_password_on_first_login = var.vm_customization_must_change_password_on_first_login
+    auto_generate_password              = var.vm_customization_auto_generate_password
+    admin_password                      = var.vm_customization_admin_password
+
+  }         
+
   depends_on              = [vcd_vapp.vapp]
 }
 

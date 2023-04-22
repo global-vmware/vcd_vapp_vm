@@ -117,6 +117,41 @@ variable "network_cidr" {
   default = "192.168.0.0/24"
 }
 
+variable "vm_customization_force" {
+  type = bool
+  default = false
+}
+
+variable "vm_customization_enabled" {
+  type = bool
+  default = true
+}
+
+variable "vm_customization_change_sid" {
+  type = bool
+  default = false
+}
+
+variable "vm_customization_allow_local_admin_password" {
+  type = bool
+  default = true
+}
+
+variable "vm_customization_must_change_password_on_first_login" {
+  type = bool
+  default = false
+}
+
+variable "vm_customization_auto_generate_password" {
+  type = bool
+  default = true
+}
+
+variable "vm_customization_admin_password" {
+  type = string
+  default = ""
+}
+
 variable "vm_metadata_cost_center" {
   type = string
   default = "1001"
