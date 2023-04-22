@@ -54,7 +54,7 @@ variable "vm_name_environment" {
 
 variable "vm_app_name" {
   type = string
-  default = "App"
+  default = "Application"
 }
 
 variable "vm_app_role" {
