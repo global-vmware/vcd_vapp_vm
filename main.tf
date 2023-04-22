@@ -62,39 +62,36 @@ resource "vcd_vapp_vm" "vm" {
   count                   = var.vm_count
 
   metadata_entry {
-  key                     = "Cost Center"
-  value                   = var.vm_metadata_cost_center
+  key                     = var.vm_metadata_key_01
+  value                   = var.vm_metadata_value_01
   type                    = var.vm_metadata_type_string_value
   user_access             = var.vm_metadata_user_access_readwrite
   is_system               = var.vm_metadata_is_system_false
   }
   
   metadata_entry {
-  key                     = "OS"
-  value                   = var.vm_metadata_os
+  key                     = var.vm_metadata_key_02
+  value                   = var.vm_metadata_value_02
   type                    = var.vm_metadata_type_string_value
   user_access             = var.vm_metadata_user_access_readwrite
   is_system               = var.vm_metadata_is_system_false
   }
 
   metadata_entry {
-  key                     = "Role"
-  value                   = var.vm_metadata_role
+  key                     = var.vm_metadata_key_03
+  value                   = var.vm_metadata_value_03
   type                    = var.vm_metadata_type_string_value
   user_access             = var.vm_metadata_user_access_readwrite
   is_system               = var.vm_metadata_is_system_false
   }
 
   metadata_entry {
-  key                     = "Version"
-  value                   = var.vm_metadata_version
+  key                     = var.vm_metadata_key_04
+  value                   = var.vm_metadata_value_04
   type                    = var.vm_metadata_type_string_value
   user_access             = var.vm_metadata_user_access_readwrite
   is_system               = var.vm_metadata_is_system_false
   }
-
-  
-
 
   network {
       type                = var.network_type
@@ -116,6 +113,6 @@ resource "vcd_vapp_vm" "vm" {
 
   }         
 
-  depends_on              = [vcd_vapp.vapp]
+  depends_on  = [vcd_vapp.vapp]
 }
 

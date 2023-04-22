@@ -10,20 +10,36 @@ output "vm_count" {
   value = var.vm_count
 }
 
-output "vm_metadata_cost_center" {
-  value = var.vm_metadata_cost_center
+output "vm_metadata_key_01" {
+  value = var.vm_metadata_key_01
 }
 
-output "vm_metadata_os" {
-  value = var.vm_metadata_os
+output "vm_metadata_value_01" {
+  value = var.vm_metadata_value_01
 }
 
-output "vm_metadata_role" {
-  value = var.vm_metadata_role
+output "vm_metadata_key_02" {
+  value = var.vm_metadata_key_02
 }
 
-output "vm_metadata_version" {
-  value = var.vm_metadata_version
+output "vm_metadata_value_02" {
+  value = var.vm_metadata_value_02
+}
+
+output "vm_metadata_key_03" {
+  value = var.vm_metadata_key_03
+}
+
+output "vm_metadata_value_03" {
+  value = var.vm_metadata_value_03
+}
+
+output "vm_metadata_key_04" {
+  value = var.vm_metadata_key_04
+}
+
+output "vm_metadata_value_04" {
+  value = var.vm_metadata_value_04
 }
 
 output "vm_sizing_policy_name" {
