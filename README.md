@@ -83,7 +83,7 @@ module "vapp_vm" {
   vdc_name                          = "<US1-VDC-NAME>"
   vcd_edgegateway_name              = "<US1-VDC-EDGE-NAME>"
   catalog_name                      = "<US1-CATALOG-NAME>"
-  catalog_template_name             = "Windows Server 2019"
+  catalog_template_name             = "Windows Server 2022"
   vapp_org_network_name             = "US1-Segment-01"
   network_cidr                      = "192.168.1.0/24"
   network_ip_allocation_mode        = "MANUAL" 
@@ -98,10 +98,13 @@ module "vapp_vm" {
   vm_computer_name_app_name         = "myapp"
   vm_computer_name_role             = "web"
   
-  vm_metadata_cost_center           = "IT Department-1001"
-  vm_metadata_os                    = "Windows 2019"
-  vm_metadata_role                  = "Web Server"
-  vm_metadata_version               = "1.0"
-  
+  vm_metadata_key_01                = "Cost Center"
+  vm_metadata_value_01              = "IT Department-1001"
+  vm_metadata_key_02                = "Operating System"
+  vm_metadata_value_02              = "Windows Server 2022"  
+  vm_metadata_key_03                = "Role"
+  vm_metadata_value_03              = "Web Server"
+  vm_metadata_key_04                = "Version"
+  vm_metadata_value_04              = "v1.0"  
 }
 ```
