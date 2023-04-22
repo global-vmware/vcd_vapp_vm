@@ -169,7 +169,7 @@ variable "vm_metadata_key_02" {
 
 variable "vm_metadata_value_02" {
   type = string
-  default = "Ubuntu 22.04"
+  default = "Windows Server 2022"
 }
 
 variable "vm_metadata_key_03" {
