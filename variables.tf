@@ -112,15 +112,22 @@ variable "vm_metadata_entries" {
   }))
   default = [
     {
-      key         = "Build Date"
-      value       = local.current_timestamp
-      type        = "MetadataDateTimeValue"
+      key         = "Built By"
+      value       = "Terraform"
+      type        = "MetadataStringValue"
       user_access = "READWRITE"
       is_system   = false
     },
     {
-      key         = "Built By"
-      value       = "Terraform"
+      key         = "Operating System"
+      value       = "Ubuntu Linux (64-Bit)"
+      type        = "MetadataStringValue"
+      user_access = "READWRITE"
+      is_system   = false
+    },
+    {
+      key         = "Server Role"
+      value       = "Web Server"
       type        = "MetadataStringValue"
       user_access = "READWRITE"
       is_system   = false
