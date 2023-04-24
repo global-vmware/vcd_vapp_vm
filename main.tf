@@ -10,33 +10,32 @@ terraform {
 }
 
 data "vcd_vdc_group" "vdc_group" {
-  name              = var.vdc_group_name
+  name                    = var.vdc_group_name
 }
 
 data "vcd_nsxt_edgegateway" "edge_gateway" {
-  org               = var.vdc_org_name
-  owner_id          = data.vcd_vdc_group.vdc_group.id
-  name              = var.vcd_edge_name
+  org                     = var.vdc_org_name
+  owner_id                = data.vcd_vdc_group.vdc_group.id
+  name                    = var.vdc_edge_name
 }
 
 data "vcd_network_routed_v2" "segment" {
-  edge_gateway_id   = data.vcd_nsxt_edgegateway.edge_gateway.id
-  name              = var.vapp_org_network_name
+  edge_gateway_id         = data.vcd_nsxt_edgegateway.edge_gateway.id
+  name                    = var.vapp_org_network_name
 }
 
 data "vcd_vm_sizing_policy" "sizing_policy" {
-  name              = var.vm_sizing_policy_name
+  name                    = var.vm_sizing_policy_name
 }
 
 data "vcd_catalog" "catalog" {
-  name              = var.catalog_name
+  name                    = var.catalog_name
 }
 
 data "vcd_catalog_vapp_template" "template" {
-  catalog_id      = data.vcd_catalog.catalog.id
-  name            = var.catalog_template_name
+  catalog_id              = data.vcd_catalog.catalog.id
+  name                    = var.catalog_template_name
 }
-
 
 resource "vcd_vapp" "vapp" {
   name                    = var.vapp_name
@@ -61,45 +60,25 @@ resource "vcd_vapp_vm" "vm" {
 
   count                   = var.vm_count
 
-  metadata_entry {
-  key                     = var.vm_metadata_key_01
-  value                   = var.vm_metadata_value_01
-  type                    = var.vm_metadata_type_string_value
-  user_access             = var.vm_metadata_user_access_readwrite
-  is_system               = var.vm_metadata_is_system_false
-  }
-  
-  metadata_entry {
-  key                     = var.vm_metadata_key_02
-  value                   = var.vm_metadata_value_02
-  type                    = var.vm_metadata_type_string_value
-  user_access             = var.vm_metadata_user_access_readwrite
-  is_system               = var.vm_metadata_is_system_false
-  }
+  dynamic "metadata_entry" {
+    for_each              = var.vm_metadata_entries
 
-  metadata_entry {
-  key                     = var.vm_metadata_key_03
-  value                   = var.vm_metadata_value_03
-  type                    = var.vm_metadata_type_string_value
-  user_access             = var.vm_metadata_user_access_readwrite
-  is_system               = var.vm_metadata_is_system_false
-  }
-
-  metadata_entry {
-  key                     = var.vm_metadata_key_04
-  value                   = var.vm_metadata_value_04
-  type                    = var.vm_metadata_type_string_value
-  user_access             = var.vm_metadata_user_access_readwrite
-  is_system               = var.vm_metadata_is_system_false
+    content {
+      key                 = metadata_entry.value.key
+      value               = metadata_entry.value.value
+      type                = metadata_entry.value.type
+      user_access         = metadata_entry.value.user_access
+      is_system           = metadata_entry.value.is_system
+    }
   }
 
   network {
-      type                = var.network_type
-      adapter_type        = var.network_adapter_type
-      name                = var.vapp_org_network_name
-      ip_allocation_mode  = var.network_ip_allocation_mode
-      ip                  = "${cidrhost(var.network_cidr, count.index + 50)}"
-      is_primary          = true
+    type                  = var.network_type
+    adapter_type          = var.network_adapter_type
+    name                  = var.vapp_org_network_name
+    ip_allocation_mode    = var.network_ip_allocation_mode
+    ip                    = "${cidrhost(var.network_cidr, count.index + 50)}"
+    is_primary            = true
   }
 
   customization {
@@ -110,9 +89,9 @@ resource "vcd_vapp_vm" "vm" {
     must_change_password_on_first_login = var.vm_customization_must_change_password_on_first_login
     auto_generate_password              = var.vm_customization_auto_generate_password
     admin_password                      = var.vm_customization_admin_password
+  }
 
-  }         
-
-  depends_on  = [vcd_vapp.vapp]
+  depends_on = [vcd_vapp.vapp]
 }
+
 

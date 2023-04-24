@@ -41,14 +41,7 @@ This Terraform module will deploy a vApp and "X" number of Virtual Machines into
 | network_adapter_type | Type of network adapter for each VM | string | VMXNET3 | no |
 | network_ip_allocation_mode | IP address allocation mode for each VM | string | MANUAL  | no |
 | network_cidr | CIDR block for the network | string | 192.168.0.0/24 | no |
-| vm_metadata_key_01 | Key for virtual machine metadata field | string | "Cost Center" | no |
-| vm_metadata_value_01 | Value for virtual machine metadata field | string | "1001" | no |
-| vm_metadata_key_02 | Key for virtual machine metadata field | string | "Operating System" | no |
-| vm_metadata_value_02 | Value for virtual machine metadata field | string | "Windows Server 2022" | no |
-| vm_metadata_key_03 | Key for virtual machine metadata field | string | "Role" | no |
-| vm_metadata_value_03 | Value for virtual machine metadata field | string | "Web Server" | no |
-| vm_metadata_key_04 | Key for virtual machine metadata field | string | "Version" | no |
-| vm_metadata_value_04 | Value for virtual machine metadata field | string | "v1.0" | no |
+| vm_metadata_entries | Metadata entries to add to the VMs | list(object({ key = string, value = string, type = string, user_access = string, is_system = bool })) | `[{ key = "Cost Center", value = "1001", type = null, user_access = "READWRITE", is_system = false }, { key = "Operating System", value = "Windows Server 2022", type = null, user_access = "READWRITE", is_system = false }, { key = "Role", value = "Web Server", type = null, user_access = "READWRITE", is_system = false }, { key = "Version", value = "v1.0", type = null, user_access = "READWRITE", is_system
 | vm_metadata_user_access_readwrite | Access level for the virtual machine metadata | string | READWRITE | No |
 | vm_metadata_is_system_false | Specifies if the metadata is system-generated or not | bool | false | No |
 
@@ -57,17 +50,11 @@ This Terraform module will deploy a vApp and "X" number of Virtual Machines into
 | Name | Description |
 |------|-------------|
 | vm_names | An array of formatted VM names. |
+| vm_ips | An array of IP addresses for each VM. |
 | vm_computer_names | An array of formatted computer names for each VM. |
+| vm_metadata_entries | An array of metadata entries for each VM. |
+| vm_count | The count of VMs created. |
 | vm_sizing_policy_name | The name of the sizing policy retrieved from the VCD instance. |
-| vm_networks | An array of network information for each VM. |
-| vm_metadata_key_01 | The key for metadata value 01. |
-| vm_metadata_value_01 | The value for metadata key 01. |
-| vm_metadata_key_02 | The key for metadata value 02. |
-| vm_metadata_value_02 | The value for metadata key 02. |
-| vm_metadata_key_03 | The key for metadata value 03. |
-| vm_metadata_value_03 | The value for metadata key 03. |
-| vm_metadata_key_04 | The key for metadata value 04. |
-| vm_metadata_value_04 | The value for metadata key 04. |
 
 ## Example Usage
 This is an example of a main.tf file that would use the "github.com/global-vmware/vcd_vapp_vm" Module Source to create a Virtual Application and it's associated Virtual Machines.
@@ -75,17 +62,17 @@ This is an example of a main.tf file that would use the "github.com/global-vmwar
 The Terraform code example for the main.tf file is below:
 
 ```terraform
-module "vapp_vm" {
-  source                            = "github.com/global-vmware/vcd_vapp_vm.git?ref=v1.1.0"
+module "vcd_vapp_vm" {
+  source                            = "github.com/global-vmware/vcd_vapp_vm.git?ref=v1.4.0"
   
   vdc_org_name                      = "<US1-VDC-ORG-NAME>"
   vdc_group_name                    = "<US1-VDC-GRP-NAME>"
   vdc_name                          = "<US1-VDC-NAME>"
   vcd_edgegateway_name              = "<US1-VDC-EDGE-NAME>"
   catalog_name                      = "<US1-CATALOG-NAME>"
-  catalog_template_name             = "Windows Server 2022"
+  catalog_template_name             = "Ubuntu 22.04"
   vapp_org_network_name             = "US1-Segment-01"
-  network_cidr                      = "192.168.1.0/24"
+  network_cidr                      = "172.16.0.0/24"
   network_ip_allocation_mode        = "MANUAL" 
 
   vm_count                          = 2
@@ -97,14 +84,6 @@ module "vapp_vm" {
   vm_computer_name_environment      = "dv"
   vm_computer_name_app_name         = "myapp"
   vm_computer_name_role             = "web"
-  
-  vm_metadata_key_01                = "Cost Center"
-  vm_metadata_value_01              = "IT Department-1001"
-  vm_metadata_key_02                = "Operating System"
-  vm_metadata_value_02              = "Windows Server 2022"  
-  vm_metadata_key_03                = "Role"
-  vm_metadata_value_03              = "Web Server"
-  vm_metadata_key_04                = "Version"
-  vm_metadata_value_04              = "v1.0"  
+
 }
 ```

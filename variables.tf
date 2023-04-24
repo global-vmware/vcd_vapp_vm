@@ -24,7 +24,7 @@ variable "vcd_edge_name" {
 
 variable "vm_sizing_policy_name" {
   type = string
-  default = "gp4.16"
+  default = "gp4.8"
 }
 
 variable "vapp_org_network_name" {
@@ -39,7 +39,7 @@ variable "catalog_name" {
 
 variable "catalog_template_name" {
   type = string
-  default = "Windows Server 2022"
+  default = "Ubuntu 22.04"
 }
 
 variable "vapp_name" {
@@ -152,44 +152,45 @@ variable "vm_customization_admin_password" {
   default = ""
 }
 
-variable "vm_metadata_key_01" {
-  type = string
-  default = "Cost Center"
-}
-
-variable "vm_metadata_value_01" {
-  type = string
-  default = "1001"
-}
-
-variable "vm_metadata_key_02" {
-  type = string
-  default = "Operating System"
-}
-
-variable "vm_metadata_value_02" {
-  type = string
-  default = "Windows Server 2022"
-}
-
-variable "vm_metadata_key_03" {
-  type = string
-  default = "Role"
-}
-
-variable "vm_metadata_value_03" {
-  type = string
-  default = "Web Server"
-}
-
-variable "vm_metadata_key_04" {
-  type = string
-  default = "Version"
-}
-
-variable "vm_metadata_value_04" {
-  type = string
-  default = "v1.0"
+variable "vm_metadata_entries" {
+  description = "List of metadata entries for the VM"
+  type        = list(object({
+    key         = string
+    value       = string
+    type        = string
+    user_access = string
+    is_system   = bool
+  }))
+  default = [
+    {
+      key         = "Cost Center"
+      value       = "1001"
+      type        = "MetadataStringValue"
+      user_access = "READWRITE"
+      is_system   = false
+    },
+    {
+      key         = "Operating System"
+      value       = "Ubuntu Linux (64-bit)"
+      type        = "MetadataStringValue"
+      user_access = "READWRITE"
+      is_system   = false
+    },
+    {
+      key         = "Role"
+      value       = "Web Server"
+      type        = "MetadataStringValue"
+      user_access = "READWRITE"
+      is_system   = false
+    },
+    {
+      key         = "Version"
+      value       = "v1.0"
+      type        = "MetadataStringValue"
+      user_access = "READWRITE"
+      is_system   = false
+    }
+  ]
 }
 
 variable "vm_metadata_type_string_value" {
