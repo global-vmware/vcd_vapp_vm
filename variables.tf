@@ -97,6 +97,10 @@ variable "vm_count" {
   default = 2
 }
 
+locals {
+  current_timestamp = timestamp()
+}
+
 variable "vm_metadata_entries" {
   description = "List of metadata entries for the VM"
   type        = list(object({
@@ -109,7 +113,7 @@ variable "vm_metadata_entries" {
   default = [
     {
       key         = "Build Date"
-      value       = timestamp()
+      value       = local.current_timestamp
       type        = "MetadataDateTimeValue"
       user_access = "READWRITE"
       is_system   = false
@@ -123,6 +127,7 @@ variable "vm_metadata_entries" {
     }
   ]
 }
+
 
 variable "network_type" {
   type = string
