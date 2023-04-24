@@ -16,7 +16,7 @@ variable "vdc_name" {
   default     = ""
 }
 
-variable "vcd_edge_name" {
+variable "vdc_edge_name" {
   type        = string
   description = "Cloud Director Edge Name"
   default     = ""
