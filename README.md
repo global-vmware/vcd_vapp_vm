@@ -41,7 +41,7 @@ This Terraform module will deploy a vApp and "X" number of Virtual Machines into
 | network_adapter_type | Type of network adapter for each VM | string | VMXNET3 | no |
 | network_ip_allocation_mode | IP address allocation mode for each VM | string | MANUAL  | no |
 | network_cidr | CIDR block for the network | string | 192.168.0.0/24 | no |
-| vm_metadata_entries | Metadata entries to add to the VMs | list(object({ key = string, value = string, type = string, user_access = string, is_system = bool })) | `[{ key = "Build Date", value = timestamp(), type = "MetadataDateTimeValue", user_access = "READWRITE", is_system = false }, { key = "Built By", value = "Terraform", type = "MetadataStringValue", user_access = "READWRITE", is_system = false }]
+| vm_metadata_entries | Metadata entries to add to the VMs | list(object({ key = string, value = string, type = string, user_access = string, is_system = bool })) | [{ key = "Build Date", value = timestamp(), type = "MetadataDateTimeValue", user_access = "READWRITE", is_system = false }, { key = "Built By", value = "Terraform", type = "MetadataStringValue", user_access = "READWRITE", is_system = false }]
 | vm_metadata_user_access_readwrite | Access level for the virtual machine metadata | string | READWRITE | No |
 | vm_metadata_is_system_false | Specifies if the metadata is system-generated or not | bool | false | No |
 
