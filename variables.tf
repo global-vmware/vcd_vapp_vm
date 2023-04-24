@@ -94,7 +94,7 @@ variable "vm_memory_hot_add_enabled" {
 
 variable "vm_min_cpu" {
   type = number
-  default = 4
+  default = 2
 }
 
 variable "network_type" {

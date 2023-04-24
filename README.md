@@ -36,7 +36,7 @@ This Terraform module will deploy a vApp and "X" number of Virtual Machines into
 | vm_count | Number of VMs to create | number | 2 | no |
 | vm_cpu_hot_add_enabled | Flag to enable or disable hot adding CPUs to VMs | bool | true | no |
 | vm_memory_hot_add_enabled | Flag to enable or disable hot adding memory to VMs | bool | true | no |
-| vm_min_cpu | Minimum number of CPUs for each VM | number | 4 | no |
+| vm_min_cpu | Minimum number of CPUs for each VM | number | 2 | no |
 | network_type | Type of network to be created (org or vapp) | string | org | no |
 | network_adapter_type | Type of network adapter for each VM | string | VMXNET3 | no |
 | network_ip_allocation_mode | IP address allocation mode for each VM | string | MANUAL  | no |
@@ -77,12 +77,12 @@ module "vcd_vapp_vm" {
 
   vm_count                          = 2
 
-  vapp_name                         = "My Development Application"
-  vm_name_environment               = "Dev"
-  vm_app_name                       = "MyApp"
+  vapp_name                         = "My Production Application"
+  vm_name_environment               = "Prod"
+  vm_app_name                       = "App"
   vm_app_role                       = "Web Server"
-  vm_computer_name_environment      = "dv"
-  vm_computer_name_app_name         = "myapp"
+  vm_computer_name_environment      = "pd"
+  vm_computer_name_app_name         = "app"
   vm_computer_name_role             = "web"
 
 }
