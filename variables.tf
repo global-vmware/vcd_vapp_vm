@@ -44,7 +44,7 @@ variable "catalog_template_name" {
 
 variable "vapp_name" {
   type = string
-  default = "My Application"
+  default = "Production Application vApp"
 }
 
 variable "vm_name_environment" {
@@ -54,7 +54,7 @@ variable "vm_name_environment" {
 
 variable "vm_app_name" {
   type = string
-  default = "Application"
+  default = "App"
 }
 
 variable "vm_app_role" {
@@ -77,11 +77,6 @@ variable "vm_computer_name_role" {
   default = "web"
 }
 
-variable "vm_count" {
-  type = number
-  default = 2
-}
-
 variable "vm_cpu_hot_add_enabled" {
   type = bool
   default = true
@@ -95,6 +90,38 @@ variable "vm_memory_hot_add_enabled" {
 variable "vm_min_cpu" {
   type = number
   default = 2
+}
+
+variable "vm_count" {
+  type = number
+  default = 2
+}
+
+variable "vm_metadata_entries" {
+  description = "List of metadata entries for the VM"
+  type        = list(object({
+    key         = string
+    value       = string
+    type        = string
+    user_access = string
+    is_system   = bool
+  }))
+  default = [
+    {
+      key         = "Build Date"
+      value       = timestamp()
+      type        = "MetadataDateTimeValue"
+      user_access = "READWRITE"
+      is_system   = false
+    },
+    {
+      key         = "Built By"
+      value       = "Terraform"
+      type        = "MetadataStringValue"
+      user_access = "READWRITE"
+      is_system   = false
+    }
+  ]
 }
 
 variable "network_type" {
@@ -150,60 +177,4 @@ variable "vm_customization_auto_generate_password" {
 variable "vm_customization_admin_password" {
   type = string
   default = ""
-}
-
-variable "vm_metadata_entries" {
-  description = "List of metadata entries for the VM"
-  type        = list(object({
-    key         = string
-    value       = string
-    type        = string
-    user_access = string
-    is_system   = bool
-  }))
-  default = [
-    {
-      key         = "Cost Center"
-      value       = "1001"
-      type        = "MetadataStringValue"
-      user_access = "READWRITE"
-      is_system   = false
-    },
-    {
-      key         = "Operating System"
-      value       = "Ubuntu Linux (64-bit)"
-      type        = "MetadataStringValue"
-      user_access = "READWRITE"
-      is_system   = false
-    },
-    {
-      key         = "Role"
-      value       = "Web Server"
-      type        = "MetadataStringValue"
-      user_access = "READWRITE"
-      is_system   = false
-    },
-    {
-      key         = "Version"
-      value       = "v1.0"
-      type        = "MetadataStringValue"
-      user_access = "READWRITE"
-      is_system   = false
-    }
-  ]
-}
-
-variable "vm_metadata_type_string_value" {
-  type = string
-  default = "MetadataStringValue"
-}
-
-variable "vm_metadata_user_access_readwrite" {
-  type = string
-  default = "READWRITE"
-}
-
-variable "vm_metadata_is_system_false" {
-  type = bool
-  default = false
 }
