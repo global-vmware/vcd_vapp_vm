@@ -24,7 +24,7 @@ variable "vdc_edge_name" {
 
 variable "vm_sizing_policy_name" {
   type = string
-  default = "gp4.8"
+  default = "gp2.4"
 }
 
 variable "vapp_org_network_name" {
