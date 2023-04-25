@@ -89,6 +89,7 @@ module "vcd_vapp_vm" {
   network_ip_allocation_mode        = "MANUAL"
 
   vm_count                          = 2
+  vm_sizing_policy_name             = "gp4.8"
 
   vapp_name                         = "My Production Application"
   vm_name_environment               = "Prod"
@@ -98,5 +99,35 @@ module "vcd_vapp_vm" {
   vm_computer_name_app_name         = "app"
   vm_computer_name_role             = "web"
 
+  vm_metadata_entries = [
+    {
+      key         = "Cost Center"
+      value       = "IT Department - 1001"
+      type        = "MetadataStringValue"
+      user_access = "READWRITE"
+      is_system   = false
+    },
+    {
+      key         = "Operating System"
+      value       = "Ubuntu Linux (64-Bit)"
+      type        = "MetadataStringValue"
+      user_access = "READWRITE"
+      is_system   = false
+    },
+    {
+      key         = "Role"
+      value       = "Web Server"
+      type        = "MetadataStringValue"
+      user_access = "READWRITE"
+      is_system   = false
+    },
+    {
+      key         = "Build Date"
+      value       = timestamp()
+      type        = "MetadataDateTimeValue"
+      user_access = "READWRITE"
+      is_system   = false
+    }
+  ]
 }
 ```
