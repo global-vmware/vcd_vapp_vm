@@ -50,6 +50,14 @@ This Terraform module will deploy a vApp and "X" number of Virtual Machines into
 | vm_customization_auto_generate_password | Specifies whether to automatically generate a password for the local administrator account | bool | true | no |
 | vm_customization_admin_password | The password for the local administrator account | string | "" | no |
 
+`NOTE:` Each object in the `vm_metadata_entries` list must have the following attributes:
+
+`key:` The key for the metadata entry.
+`value:` The value for the metadata entry.
+`type:` The type of the metadata value. The acceptable values are `"MetadataStringValue"`, `"MetadataNumberValue"`, `"MetadataDateTimeValue"`, `"MetadataBooleanValue"`.
+`user_access:` The level of access granted to users for this metadata entry. The acceptable values are `"READONLY"`, `"READWRITE"`.
+`is_system:` Specifies whether the metadata is system-generated or not. The acceptable values are `true`, `false`.
+
 ## Outputs
 
 | Name | Description |
