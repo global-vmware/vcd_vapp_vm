@@ -115,7 +115,7 @@ module "vcd_vapp_vm" {
       is_system   = false
     },
     {
-      key         = "Role"
+      key         = "Server Role"
       value       = "Web Server"
       type        = "MetadataStringValue"
       user_access = "READWRITE"
@@ -127,7 +127,14 @@ module "vcd_vapp_vm" {
       type        = "MetadataDateTimeValue"
       user_access = "READWRITE"
       is_system   = false
-    }
+    },
+    {
+      key         = "Built By"
+      value       = "Build Engineering Team"
+      type        = "MetadataStringValue"
+      user_access = "READWRITE"
+      is_system   = false
+    }    
   ]
 }
 ```
