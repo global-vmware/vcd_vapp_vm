@@ -33,17 +33,22 @@ This Terraform module will deploy a vApp and "X" number of Virtual Machines into
 | vm_computer_name_environment | Environment to be used in computer name | string | pd | no |
 | vm_computer_name_app_name | Application name to be used in computer name | string | app | no |
 | vm_computer_name_role | Role to be used in computer name | string | web | no |
-| vm_count | Number of VMs to create | number | 2 | no |
 | vm_cpu_hot_add_enabled | Flag to enable or disable hot adding CPUs to VMs | bool | true | no |
 | vm_memory_hot_add_enabled | Flag to enable or disable hot adding memory to VMs | bool | true | no |
 | vm_min_cpu | Minimum number of CPUs for each VM | number | 2 | no |
-| network_type | Type of network to be created (org or vapp) | string | org | no |
-| network_adapter_type | Type of network adapter for each VM | string | VMXNET3 | no |
-| network_ip_allocation_mode | IP address allocation mode for each VM | string | MANUAL  | no |
-| network_cidr | CIDR block for the network | string | 192.168.0.0/24 | no |
-| vm_metadata_entries | Metadata entries to add to the VMs | list(object({ key = string, value = string, type = string, user_access = string, is_system = bool })) | [{ key = "Built By", value = "Terraform", type = "MetadataStringValue", user_access = "READWRITE", is_system = false }, { key = "Operating System", value = "Ubuntu Linux (64-Bit)", type = "MetadataStringValue", user_access = "READWRITE", is_system = false }, { key = "Server Role", value = "Web Server", type = "MetadataStringValue", user_access = "READWRITE", is_system = false }]
-| vm_metadata_user_access_readwrite | Access level for the virtual machine metadata | string | READWRITE | No |
-| vm_metadata_is_system_false | Specifies if the metadata is system-generated or not | bool | false | No |
+| vm_count | Number of VMs to create | number | 2 | no |
+| vm_metadata_entries | Metadata entries to add to the VMs | list(object({ key = string, value = string, type = string, user_access = string, is_system = bool })) | `[{ key = "Built By", value = "Terraform", type = "MetadataStringValue", user_access = "READWRITE", is_system = false }, { key = "Operating System", value = "Ubuntu Linux (64-Bit)", type = "MetadataStringValue", user_access = "READWRITE", is_system = false }, { key = "Server Role", value = "Web Server", type = "MetadataStringValue", user_access = "READWRITE", is_system = false }]` | no |
+| network_type | The type of network adapter to use | string | "org" | no |
+| network_adapter_type | The type of network adapter to use | string | "VMXNET3" | no |
+| network_ip_allocation_mode | The IP address allocation mode | string | "MANUAL" | no |
+| network_cidr | The CIDR notation for the network | string | "192.168.0.0/24" | no |
+| vm_customization_force | Specifies whether to force the customization even if the VM is powered on | bool | false | no |
+| vm_customization_enabled | Specifies whether to enable customization of the VM | bool | true | no |
+| vm_customization_change_sid | Specifies whether to generate a new SID for the Windows VM | bool | false | no |
+| vm_customization_allow_local_admin_password | Specifies whether to allow the use of local administrator passwords | bool | true | no |
+| vm_customization_must_change_password_on_first_login | Specifies whether the user must change the password on the first login | bool | false | no |
+| vm_customization_auto_generate_password | Specifies whether to automatically generate a password for the local administrator account | bool | true | no |
+| vm_customization_admin_password | The password for the local administrator account | string | "" | no |
 
 ## Outputs
 

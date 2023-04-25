@@ -97,10 +97,6 @@ variable "vm_count" {
   default = 2
 }
 
-locals {
-  current_timestamp = timestamp()
-}
-
 variable "vm_metadata_entries" {
   description = "List of metadata entries for the VM"
   type        = list(object({
@@ -134,7 +130,6 @@ variable "vm_metadata_entries" {
     }
   ]
 }
-
 
 variable "network_type" {
   type = string
