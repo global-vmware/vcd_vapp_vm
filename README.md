@@ -14,6 +14,7 @@ This Module depends on a vApp already being created in your Virtual Data Center.
 
 | Name | Type |
 |------|------|
+| [vcd_vapp_org_network](https://registry.terraform.io/providers/vmware/vcd/3.8.2/docs/resources/vapp_org_network) | resource |
 | [vcd_vapp_vm](https://registry.terraform.io/providers/vmware/vcd/3.8.2/docs/resources/vapp_vm) | resource |
 
 ## Inputs
