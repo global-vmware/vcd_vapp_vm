@@ -37,28 +37,28 @@ data "vcd_catalog_vapp_template" "template" {
   name                    = var.catalog_template_name
 }
 
-resource "vcd_vapp" "vapp" {
+data "vcd_vapp" "vapp" {
   name                    = var.vapp_name
   org                     = var.vdc_org_name
   vdc                     = var.vdc_name
 }
 
 resource "vcd_vapp_org_network" "vappOrgNet" {
-  vapp_name               = "${vcd_vapp.vapp.name}"
+  vapp_name               = data.vcd_vapp.vapp.name
   org_network_name        = data.vcd_network_routed_v2.segment.name
 }
 
 resource "vcd_vapp_vm" "vm" {
-  vapp_name               = "${vcd_vapp.vapp.name}"
-  name                    = "${format("${var.vm_name_environment} ${var.vm_app_name} ${var.vm_app_role} %02d", count.index + 1)}"
-  computer_name           = "${format("${var.vm_computer_name_environment}-${var.vm_computer_name_app_name}-${var.vm_computer_name_role}%02d", count.index + 1)}"
+  vapp_name               = data.vcd_vapp.vapp.name
+  name                    = format("%s %s %s %02d", var.vm_name_environment, var.vm_app_name, var.vm_app_role, count.index + 1)
+  computer_name           = format("%s-%s-%s%02d", var.vm_computer_name_environment, var.vm_computer_name_app_name, var.vm_computer_name_role, count.index + 1)
   vapp_template_id        = data.vcd_catalog_vapp_template.template.id
   cpu_hot_add_enabled     = var.vm_cpu_hot_add_enabled
   memory_hot_add_enabled  = var.vm_memory_hot_add_enabled
   sizing_policy_id        = data.vcd_vm_sizing_policy.sizing_policy.id
   cpus                    = var.vm_min_cpu
 
-  count                   = var.vm_count
+  count                   = var.vm_count == 0 ? 1 : var.vm_count
 
   dynamic "metadata_entry" {
     for_each              = var.vm_metadata_entries
@@ -73,12 +73,12 @@ resource "vcd_vapp_vm" "vm" {
   }
 
   network {
-    type                  = var.network_type
-    adapter_type          = var.network_adapter_type
-    name                  = var.vapp_org_network_name
-    ip_allocation_mode    = var.network_ip_allocation_mode
-    ip                    = "${cidrhost(var.network_cidr, count.index + 50)}"
-    is_primary            = true
+    type                = var.network_type
+    adapter_type        = var.network_adapter_type
+    name                = var.vapp_org_network_name
+    ip_allocation_mode  = var.network_ip_allocation_mode
+    ip                  = var.network_ip_allocation_mode == "DHCP" ? "" : var.network_ip_allocation_mode == "POOL" ? "" : element(var.vm_ips, count.index)
+    is_primary          = true
   }
 
   customization {
@@ -89,9 +89,15 @@ resource "vcd_vapp_vm" "vm" {
     must_change_password_on_first_login = var.vm_customization_must_change_password_on_first_login
     auto_generate_password              = var.vm_customization_auto_generate_password
     admin_password                      = var.vm_customization_admin_password
+    number_of_auto_logons               = var.vm_customization_number_of_auto_logons
+    join_domain                         = var.vm_customization_join_domain
+    join_org_domain                     = var.vm_customization_join_org_domain
+    join_domain_name                    = var.vm_customization_join_domain_name
+    join_domain_user                    = var.vm_customization_join_domain_user
+    join_domain_password                = var.vm_customization_join_domain_password
+    join_domain_account_ou              = var.vm_customization_join_domain_account_ou
+    initscript                          = var.vm_customization_initscript
   }
-
-  depends_on = [vcd_vapp.vapp]
 }
 
 
