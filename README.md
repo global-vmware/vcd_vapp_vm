@@ -21,8 +21,8 @@ This Module depends on a vApp already being created in your Virtual Data Center.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|----------|
-| vdc_org_name | Name of the Data Center Group Organization | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name>"` | Yes |
-| vdc_group_name | Name of the Data Center Group | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name> <datacenter group>"` | Yes |
+| vdc_org_name | The name of the Data Center Group Organization in VCD | string | `"Organization Name Format: <Account_Number>-<Region>-<Account_Name>"` | yes |
+| vdc_group_name | The name of the Data Center Group in VCD | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name> <datacenter group>"` | yes |
 | vdc_name | Cloud Director VDC Name | string | `"Virtual Data Center Name Format: <Account_Number>-<Region>-<Segment Name>"` | Yes |
 | vcd_edge_name | Name of the Data Center Group Edge Gateway | string | `"Edge Gateway Name Format: <Account_Number>-<Region>-<Edge_GW_Identifier>-<edge>"` | Yes |
 | vm_sizing_policy_name | Cloud Director VM Sizing Policy Name | string | "gp2.4" | No |
@@ -152,3 +152,7 @@ module "vcd_vapp_vm" {
   ]
 }
 ```
+
+## Authors
+
+This module is maintained by the [Global VMware Cloud Automation Services Team](https://github.com/global-vmware).
