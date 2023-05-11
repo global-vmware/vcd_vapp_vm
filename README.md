@@ -15,8 +15,14 @@ This Module depends on a vApp already being created in your Virtual Data Center.
 
 | Name | Type |
 |------|------|
-| [vcd_vapp_org_network](https://registry.terraform.io/providers/vmware/vcd/3.8.2/docs/resources/vapp_org_network) | resource |
-| [vcd_vapp_vm](https://registry.terraform.io/providers/vmware/vcd/3.8.2/docs/resources/vapp_vm) | resource |
+| [vcd_vdc_group](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/vdc_group) | data source |
+| [vcd_nsxt_edgegateway](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/nsxt_edgegateway) | data source |
+| [vcd_network_routed_v2](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/network_routed_v2) | data source |
+| [vcd_vm_sizing_policy](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/vm_sizing_policy) | data source |
+| [vcd_catalog](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/catalog) | data source |
+| [vcd_vapp](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/vapp) | data source |
+| [vcd_vapp_org_network](https://registry.terraform.io/providers/vmware/vcd/latest/docs/resources/vapp_org_network) | resource |
+| [vcd_vapp_vm](https://registry.terraform.io/providers/vmware/vcd/latest/docs/resources/vapp_vm) | resource |
 
 ## Inputs
 
