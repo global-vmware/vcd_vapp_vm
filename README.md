@@ -92,7 +92,7 @@ The Terraform code example for the main.tf file is below:
 
 ```terraform
 module "vcd_vapp_vm" {
-  source                            = "github.com/global-vmware/vcd_vapp_vm.git?ref=v1.6.0"
+  source                            = "github.com/global-vmware/vcd_vapp_vm.git?ref=v2.0.0"
 
   vdc_org_name                      = "<US1-VDC-ORG-NAME>"
   vdc_group_name                    = "<US1-VDC-GRP-NAME>"
@@ -104,6 +104,8 @@ module "vcd_vapp_vm" {
 
   vm_sizing_policy_name             = "gp4.8"
   vm_min_cpu                        = "4"
+
+  vm_count                          = 2
 
   vapp_name                         = "My Production Application"
   vapp_org_networks = [
