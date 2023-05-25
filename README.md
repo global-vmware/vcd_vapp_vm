@@ -108,9 +108,9 @@ module "vcd_vapp_vm" {
   vm_count                          = 2
 
   vapp_name                         = "My Production Application"
-  vapp_org_networks = [
-  { name = "US1-Segment-01" },
-  { name = "US1-Segment-02" },
+  vapp_org_networks                 = [
+    { name = "US1-Segment-01" },
+    { name = "US1-Segment-02" },
   ]
 
   vm_name                           = ["Production App Web Server"]
@@ -150,7 +150,7 @@ module "vcd_vapp_vm" {
     }
   ]
   
-  network_interfaces                = [
+  network_interfaces      = [
     {
     type                  = "org"
     adapter_type          = "VMXNET3"
@@ -168,9 +168,6 @@ module "vcd_vapp_vm" {
     is_primary            = false
     }
   ]
-
-  vm_ips_index_multiplier = 2
-  vm_ips                  = ["172.16.0.10", "172.16.1.10", "172.16.0.11", "172.16.1.11"]
 }
 ```
 
