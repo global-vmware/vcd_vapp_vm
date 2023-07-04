@@ -23,30 +23,46 @@ variable "vdc_edge_name" {
 }
 
 variable "vm_sizing_policy_name" {
-  type = string
+  type    = string
   default = "gp2.4"
 }
 
 variable "vapp_org_networks" {
   description = "List of vApp Org network names"
   type        = list(object({
-    name = string
+    name      = string
   }))
   default     = []
 }
 
+variable "is_fenced" {
+  type    = bool
+  default = false
+  
+}
+
+variable "retain_ip_mac_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "reboot_vapp_on_removal" {
+  type    = bool
+  default = true
+}
+
 variable "catalog_name" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "catalog_template_name" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "vapp_name" {
-  type = string
+  type    = string
   default = "Production Application vApp"
 }
 
@@ -75,28 +91,28 @@ variable "computer_name" {
 }
 
 variable "vm_cpu_hot_add_enabled" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "vm_memory_hot_add_enabled" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "vm_min_cpu" {
-  type = number
+  type    = number
   default = 2
 }
 
 variable "vm_count" {
-  type = number
+  type    = number
   default = 2
 }
 
 variable "vm_metadata_entries" {
-  description = "List of metadata entries for the VM"
-  type        = list(object({
+  description   = "List of metadata entries for the VM"
+  type          = list(object({
     key         = string
     value       = string
     type        = string
@@ -135,8 +151,8 @@ variable "disks_per_vm" {
 }
 
 variable "vm_disks" {
-  description = "List of disks per virtual machine"
-  type        = list(object({
+  description   = "List of disks per virtual machine"
+  type          = list(object({
     name        = string
     bus_number  = number
     unit_number = number
@@ -145,8 +161,8 @@ variable "vm_disks" {
 }
 
 variable "network_interfaces" {
-  description = "List of network interfaces for the VM"
-  type        = list(object({
+  description           = "List of network interfaces for the VM"
+  type                  = list(object({
     type                = string
     adapter_type        = string
     name                = string
@@ -182,7 +198,7 @@ variable "vm_ips_index_multiplier" {
 
 variable "vm_ips" {
   type    = list(string)
-  default = ["", ""]
+  default = [""]
 }
 
 variable "override_template_disks" {
@@ -195,7 +211,7 @@ variable "override_template_disks" {
     iops            = number
     storage_profile = string
   }))
-  default = []
+  default           = []
 }
 
 variable "vm_customization_force" {

@@ -7,7 +7,7 @@ This Terraform module will deploy Virtual Machines into an existing Virtual Appl
 | Name | Version |
 |------|---------|
 | terraform | ~> 1.2 |
-| vcd | ~> 3.8.2 |
+| vcd | ~> 3.8 |
 
 This Module depends on a vApp already being created in your Virtual Data Center. You can use the [vcd_vapp](https://github.com/global-vmware/vcd_vapp) Module to create the vApp that will be used to provision your VMs into.
 
@@ -35,6 +35,9 @@ This Module depends on a vApp already being created in your Virtual Data Center.
 | vcd_edge_name | Name of the Data Center Group Edge Gateway | string | `"Edge Gateway Name Format: <Account_Number>-<Region>-<Edge_GW_Identifier>-<edge>"` | Yes |
 | vm_sizing_policy_name | Cloud Director VM Sizing Policy Name | string | "gp2.4" | no |
 | vapp_org_networks | List of vApp Org network names | list(object({ name = string })) | [] | yes |
+| is_fenced | Allows identical virtual machines in different vApp networks to connect to Organization VDC Networks that are accessed in this vApp. | bool | `false` | no |
+| retain_ip_mac_enabled | Specifies whether the network resources such as IP/MAC of router will be retained across deployments. Configurable when is_fenced is true. | bool | `false` | no |
+| reboot_vapp_on_removal | VCD 10.4.1+ API prohibits removal of vApp network from a powered on vApp. Set to true to power off the vApp during vApp network removal. If the vApp's original state was powered on, it will be powered back on after removing the network | bool | `true` | no |
 catalog_name | Cloud Director Catalog Name | string | `"VCD Catalog Name Format: <Account_Number>-<Region>-<catalog>"` | Yes |
 | catalog_template_name | Cloud Director Catalog Template Name | string | "" | Yes |
 | vapp_name | Cloud Director vApp Name | string | "" | yes |
@@ -51,7 +54,7 @@ catalog_name | Cloud Director Catalog Name | string | `"VCD Catalog Name Format:
 | vm_disks | List of disks per virtual machine | list(object({ name = string, bus_number = number, unit_number = number })) | [] | no |
 | network_interfaces | List of network interfaces for the VM | list(object({ type = string, adapter_type = string, name = string, ip_allocation_mode = string, ip = string, is_primary = bool })) | [...] | no |
 | vm_ips_index_multiplier | Number of network interfaces for each VM deployment | number | 1 | no |
-| vm_ips | List of IP addresses to assign to VMs | list(string) | `["", ""]` | no |
+| vm_ips | List of IP addresses to assign to VMs | list(string) | `[""]` | no |
 | override_template_disks | A list of disks to override in the vApp template | list(object({ bus_type = string, size_in_mb = number, bus_number = number, unit_number = number, iops = number, storage_profile = string })) | [] | no |
 | vm_customization_force | Specifies whether to force the customization even if the VM is powered on | bool | false | no |
 | vm_customization_enabled | Specifies whether to enable customization of the VM | bool | true | no |
@@ -92,7 +95,7 @@ The Terraform code example for the main.tf file is below:
 
 ```terraform
 module "vcd_vapp_vm" {
-  source                            = "github.com/global-vmware/vcd_vapp_vm.git?ref=v2.0.0"
+  source                            = "github.com/global-vmware/vcd_vapp_vm.git?ref=v2.1.0"
 
   vdc_org_name                      = "<US1-VDC-ORG-NAME>"
   vdc_group_name                    = "<US1-VDC-GRP-NAME>"
