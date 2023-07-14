@@ -51,6 +51,10 @@ variable "reboot_vapp_on_removal" {
   default = true
 }
 
+variable "catalog_org_name" {
+  type = string
+}
+
 variable "catalog_name" {
   type    = string
   default = ""

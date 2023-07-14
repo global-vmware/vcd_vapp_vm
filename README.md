@@ -38,7 +38,8 @@ This Module depends on a vApp already being created in your Virtual Data Center.
 | is_fenced | Allows identical virtual machines in different vApp networks to connect to Organization VDC Networks that are accessed in this vApp. | bool | `false` | no |
 | retain_ip_mac_enabled | Specifies whether the network resources such as IP/MAC of router will be retained across deployments. Configurable when is_fenced is true. | bool | `false` | no |
 | reboot_vapp_on_removal | VCD 10.4.1+ API prohibits removal of vApp network from a powered on vApp. Set to true to power off the vApp during vApp network removal. If the vApp's original state was powered on, it will be powered back on after removing the network | bool | `true` | no |
-catalog_name | Cloud Director Catalog Name | string | `"VCD Catalog Name Format: <Account_Number>-<Region>-<catalog>"` | Yes |
+| catalog_org_name | Cloud Director Organization Name for your Catalog | string | `"Organization Name Format: <Account_Number>-<Region>-<Account_Name>"` | yes |
+| catalog_name | Cloud Director Catalog Name | string | `"VCD Catalog Name Format: <Account_Number>-<Region>-<catalog>"` | Yes |
 | catalog_template_name | Cloud Director Catalog Template Name | string | "" | Yes |
 | vapp_name | Cloud Director vApp Name | string | "" | yes |
 | vm_name_format | Format for the VM name | string | "%s %02d" | no |
@@ -95,13 +96,14 @@ The Terraform code example for the main.tf file is below:
 
 ```terraform
 module "vcd_vapp_vm" {
-  source                            = "github.com/global-vmware/vcd_vapp_vm.git?ref=v2.1.0"
+  source                            = "github.com/global-vmware/vcd_vapp_vm.git?ref=v2.2.0"
 
   vdc_org_name                      = "<US1-VDC-ORG-NAME>"
   vdc_group_name                    = "<US1-VDC-GRP-NAME>"
   vdc_name                          = "<US1-VDC-NAME>"
   vdc_edge_name                     = "<US1-VDC-EDGE-NAME>"
 
+  catalog_org_name                  = "<US1-CATALOG-ORG-NAME>"
   catalog_name                      = "<US1-CATALOG-NAME>"
   catalog_template_name             = "<US1-CATALOG-TEMPLATE-NAME>"
 
