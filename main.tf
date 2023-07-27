@@ -45,13 +45,10 @@ data "vcd_vapp" "vapp" {
   vdc  = var.vdc_name
 }
 
-resource "vcd_vapp_org_network" "vappOrgNet" {
+data "vcd_vapp_org_network" "vappOrgNet" {
   for_each                = { for net in var.vapp_org_networks : net.name => net }
   vapp_name               = data.vcd_vapp.vapp.name
   org_network_name        = each.value.name
-  is_fenced               = var.is_fenced
-  retain_ip_mac_enabled   = var.retain_ip_mac_enabled
-  reboot_vapp_on_removal  = var.reboot_vapp_on_removal
 }
 
 resource "vcd_vapp_vm" "vm" {
@@ -131,6 +128,4 @@ resource "vcd_vapp_vm" "vm" {
     join_domain_account_ou              = var.vm_customization_join_domain_account_ou
     initscript                          = var.vm_customization_initscript
   }
-  
-  depends_on = [vcd_vapp_org_network.vappOrgNet]
 }
