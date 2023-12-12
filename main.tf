@@ -58,6 +58,7 @@ data "vcd_vapp_org_network" "vappOrgNet" {
 resource "vcd_vapp_vm" "vm" {
   for_each = { for i in range(var.vm_count) : i => i }
   org                     = var.vdc_org_name
+  vdc                     = var.vdc_name
   vapp_name               = data.vcd_vapp.vapp.name
   name                    = var.vm_name_format != "" ? format(var.vm_name_format, var.vm_name[each.key % length(var.vm_name)], each.key + 1) : var.vm_name[each.key % length(var.vm_name)]
   computer_name           = var.computer_name_format != "" ? format(var.computer_name_format, var.computer_name[each.key % length(var.computer_name)], each.key + 1) : var.computer_name[each.key % length(var.computer_name)]
