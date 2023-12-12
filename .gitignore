@@ -7,7 +7,10 @@
 *.tfstate.*
 secrets.tfvars
 secrets.auto.tfvars
+terraform.tfvars
+terraform.auto.tfvars
 providers.tf
+
 # Crash log files
 crash.log
 
