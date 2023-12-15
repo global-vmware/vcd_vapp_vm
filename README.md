@@ -1,6 +1,6 @@
 # Virtual Application VM Terraform Module
 
-This Terraform module will deploy Virtual Machines into an existing Virtual Application (vApp) that is in a VMware Cloud Director (VCD) Environment.  This module can be used to provsion new Virtual Machines into [Rackspace Technology SDDC Flex](https://www.rackspace.com/cloud/private/software-defined-data-center-flex) VCD Data Center Regions.
+This Terraform module will deploy Virtual Machines into an existing Virtual Application (vApp) that is in a VMware Cloud Director (VCD) Environment.  This module can be used to provision new Virtual Machines into [Rackspace Technology SDDC Flex](https://www.rackspace.com/cloud/private/software-defined-data-center-flex) VCD Data Center Regions.
 
 ## Requirements
 
@@ -31,7 +31,7 @@ This Module depends on a vApp already being created in your Virtual Data Center.
 |------|-------------|------|---------|----------|
 | vdc_org_name | The name of the Data Center Group Organization in VCD | string | `"Organization Name Format: <Account_Number>-<Region>-<Account_Name>"` | yes |
 | vdc_group_name | The name of the Data Center Group in VCD | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name> <datacenter group>"` | yes |
-| vdc_name | Cloud Director VDC Name | string | `"Virtual Data Center Name Format: <Account_Number>-<Region>-<Segment Name>"` | Yes |
+| vdc_name | Cloud Director VDC Name | string | `"Virtual Data Center Name Format: <Account_Number>-<Region>-<VDC_Name>"` | Yes |
 | vcd_edge_name | Name of the Data Center Group Edge Gateway | string | `"Edge Gateway Name Format: <Account_Number>-<Region>-<Edge_GW_Identifier>-<edge>"` | Yes |
 | vm_sizing_policy_name | Cloud Director VM Sizing Policy Name | string | "gp2.4" | no |
 | vapp_org_networks | List of vApp Org network names | list(object({ name = string })) | [] | yes |
@@ -96,7 +96,7 @@ The Terraform code example for the main.tf file is below:
 
 ```terraform
 module "vcd_vapp_vm" {
-  source                            = "github.com/global-vmware/vcd_vapp_vm.git?ref=v2.2.0"
+  source                            = "github.com/global-vmware/vcd_vapp_vm.git?ref=v2.2.1"
 
   vdc_org_name                      = "<US1-VDC-ORG-NAME>"
   vdc_group_name                    = "<US1-VDC-GRP-NAME>"
