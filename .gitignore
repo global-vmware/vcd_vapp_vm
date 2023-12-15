@@ -7,9 +7,14 @@
 *.tfstate.*
 secrets.tfvars
 secrets.auto.tfvars
-providers.tf
 terraform.tfvars
 terraform.auto.tfvars
+providers.tf
+<<<<<<< HEAD
+terraform.tfvars
+terraform.auto.tfvars
+=======
+>>>>>>> fc6645f95bcbe67870a637444dab3919eeef6511
 
 # Crash log files
 crash.log
