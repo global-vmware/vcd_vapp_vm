@@ -28,7 +28,7 @@ variable "vm_sizing_policy_name" {
 }
 
 variable "vapp_org_networks" {
-  description = "List of Org networks with their types"
+  description = "List of vApp Org networks with their types"
   type = list(object({
     name = string
     type = string
