@@ -20,11 +20,22 @@ data "vcd_nsxt_edgegateway" "edge_gateway" {
   name      = var.vdc_edge_name
 }
 
-data "vcd_network_routed_v2" "segment" {
-  for_each        = { for net in var.vapp_org_networks : net.name => net }
+locals {
+  network_data = { for net in var.vapp_org_networks : net.name => net }
+}
+
+data "vcd_network_routed_v2" "segment_routed" {
+  for_each        = { for name, net in local.network_data : name => net if net.type == "routed" }
   org             = var.vdc_org_name
   edge_gateway_id = data.vcd_nsxt_edgegateway.edge_gateway.id
   name            = each.value.name
+}
+
+data "vcd_network_isolated_v2" "segment_isolated" {
+  for_each = { for name, net in local.network_data : name => net if net.type == "isolated" }
+  org      = var.vdc_org_name
+  owner_id = data.vcd_vdc_group.vdc_group.id
+  name     = each.value.name
 }
 
 data "vcd_vm_sizing_policy" "sizing_policy" {
@@ -49,7 +60,7 @@ data "vcd_vapp" "vapp" {
 }
 
 data "vcd_vapp_org_network" "vappOrgNet" {
-  for_each          = { for net in var.vapp_org_networks : net.name => net }
+  for_each          = { for net in local.network_data : net.name => net }
   org               = var.vdc_org_name
   vdc               = var.vdc_name
   vapp_name         = data.vcd_vapp.vapp.name

@@ -6,8 +6,8 @@ This Terraform module will deploy Virtual Machines into an existing Virtual Appl
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 1.2 |
-| vcd | ~> 3.8 |
+| terraform | ~> 1.5 |
+| vcd | ~> 3.9 |
 
 This Module depends on a vApp already being created in your Virtual Data Center. You can use the [vcd_vapp](https://github.com/global-vmware/vcd_vapp) Module to create the vApp that will be used to provision your VMs into.
 
@@ -18,6 +18,7 @@ This Module depends on a vApp already being created in your Virtual Data Center.
 | [vcd_vdc_group](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/vdc_group) | data source |
 | [vcd_nsxt_edgegateway](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/nsxt_edgegateway) | data source |
 | [vcd_network_routed_v2](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/network_routed_v2) | data source |
+| [vcd_network_isolated_v2](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/network_isolated_v2) | data source |
 | [vcd_vm_sizing_policy](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/vm_sizing_policy) | data source |
 | [vcd_catalog](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/catalog) | data source |
 | [vcd_catalog_vapp_template](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/catalog_vapp_template) | data source |
@@ -34,7 +35,7 @@ This Module depends on a vApp already being created in your Virtual Data Center.
 | vdc_name | Cloud Director VDC Name | string | `"Virtual Data Center Name Format: <Account_Number>-<Region>-<Segment Name>"` | Yes |
 | vcd_edge_name | Name of the Data Center Group Edge Gateway | string | `"Edge Gateway Name Format: <Account_Number>-<Region>-<Edge_GW_Identifier>-<edge>"` | Yes |
 | vm_sizing_policy_name | Cloud Director VM Sizing Policy Name | string | "gp2.4" | no |
-| vapp_org_networks | List of vApp Org network names | list(object({ name = string })) | [] | yes |
+| vapp_org_networks | List of vApp Org networks (type can equal "routed" or "isolated") | list(object({ name = string, type = string })) | [] | yes |
 | is_fenced | Allows identical virtual machines in different vApp networks to connect to Organization VDC Networks that are accessed in this vApp. | bool | `false` | no |
 | retain_ip_mac_enabled | Specifies whether the network resources such as IP/MAC of router will be retained across deployments. Configurable when is_fenced is true. | bool | `false` | no |
 | reboot_vapp_on_removal | VCD 10.4.1+ API prohibits removal of vApp network from a powered on vApp. Set to true to power off the vApp during vApp network removal. If the vApp's original state was powered on, it will be powered back on after removing the network | bool | `true` | no |
@@ -113,9 +114,10 @@ module "vcd_vapp_vm" {
   vm_count                          = 2
 
   vapp_name                         = "My Production Application"
+
   vapp_org_networks                 = [
-    { name = "US1-Segment-01" },
-    { name = "US1-Segment-02" },
+    { name = "US1-Segment-01", type = "routed" },
+    { name = "US1-Segment-02", type = "routed" }
   ]
 
   vm_name                           = ["Production App Web Server"]
