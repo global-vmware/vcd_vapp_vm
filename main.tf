@@ -27,7 +27,6 @@ locals {
 data "vcd_network_routed_v2" "segment_routed" {
   for_each        = { for name, net in local.network_data : name => net if net.type == "routed" }
   org             = var.vdc_org_name
-  for_each        = { for net in var.vapp_org_networks : net.name => net }
   edge_gateway_id = data.vcd_nsxt_edgegateway.edge_gateway.id
   name            = each.value.name
 }
