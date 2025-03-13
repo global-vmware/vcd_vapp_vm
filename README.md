@@ -44,17 +44,17 @@ This Module depends on a vApp already being created in your Virtual Data Center.
 | reboot_vapp_on_removal | Reboot vApp on network removal | bool | `true` | no |
 | catalog_org_name | Cloud Director Organization Name for Catalog | string | `""` | yes |
 | catalog_name | Cloud Director Catalog Name | string | `""` | yes |
+| catalog_template_name | Catalog template name for VMs | string | `""` | yes |
 | boot_catalog_org_name | Organization name for boot catalog | string | `""` | no |
 | boot_catalog_name | Catalog name for boot media | string | `""` | no |
+| boot_iso_image_name | ISO name for boot image | string | `""` | no |
 | inserted_media_iso_name | ISO name for inserted boot media | string | `""` | no |
 | inserted_media_eject_force | Force eject ISO if locked | bool | `true` | no |
-| boot_iso_image_name | ISO name for boot image | string | `""` | no |
-| catalog_template_name | Catalog template name for VMs | string | `""` | yes |
 | vapp_name | Cloud Director vApp Name | string | `"Production Application vApp"` | yes |
-| vm_name_format | Format for VM names | string | `"%s %02d"` | no |
 | vm_name | List of VM names | list(string) | `[]` | yes |
-| computer_name_format | Format for computer names | string | `"%s-%02d"` | no |
+| vm_name_format | Format for VM names | string | `"%s %02d"` | no |
 | computer_name | List of computer names | list(string) | `[]` | yes |
+| computer_name_format | Format for computer names | string | `"%s-%02d"` | no |
 | vm_cpu_hot_add_enabled | Enable hot add for CPUs | bool | `false` | no |
 | vm_memory_hot_add_enabled | Enable hot add for memory | bool | `false` | no |
 | vm_min_cpu | Minimum CPUs per VM | number | `2` | no |
@@ -122,9 +122,6 @@ module "vcd_vapp_vm" {
   catalog_name                      = "<US1-CATALOG-NAME>"
   
   catalog_template_name             = "<US1-CATALOG-TEMPLATE-NAME>"
-
-  #boot_catalog_org_name             = "<US1-BOOT-CATALOG-ORG-NAME>"
-  #boot_catalog_name                 = "<US1-BOOT-CATALOG-NAME>"
 
   vm_sizing_policy_name             = "gp4.8"
   vm_min_cpu                        = "4"
