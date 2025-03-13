@@ -42,15 +42,36 @@ data "vcd_vm_sizing_policy" "sizing_policy" {
   name = var.vm_sizing_policy_name
 }
 
-data "vcd_catalog" "catalog" {
+data "vcd_catalog" "template_catalog" {
   org   = var.catalog_org_name
   name  = var.catalog_name
 }
 
 data "vcd_catalog_vapp_template" "template" {
+  count       = length(var.catalog_template_name) > 0 ? 1 : 0
   org         = var.vdc_org_name
-  catalog_id  = data.vcd_catalog.catalog.id
+  catalog_id  = data.vcd_catalog.template_catalog.id
   name        = var.catalog_template_name
+}
+
+data "vcd_catalog" "boot_catalog" {
+  for_each = var.boot_catalog_name != "" ? { "boot_catalog" = var.boot_catalog_name } : {}
+  org      = var.boot_catalog_org_name
+  name     = each.value
+}
+
+data "vcd_catalog_media" "inserted_media_iso" {
+  for_each   = var.inserted_media_iso_name != "" ? { "inserted_media_iso" = var.inserted_media_iso_name } : {}
+  org        = var.catalog_org_name
+  catalog_id = var.boot_catalog_name != "" ? data.vcd_catalog.boot_catalog["boot_catalog"].id : null
+  name       = each.value
+}
+
+data "vcd_catalog_media" "boot_image_iso" {
+  count      = var.boot_iso_image_name != "" ? 1 : 0
+  org        = var.catalog_org_name
+  catalog_id = var.boot_catalog_name != "" ? data.vcd_catalog.boot_catalog["boot_catalog"].id : null
+  name       = var.boot_iso_image_name
 }
 
 data "vcd_vapp" "vapp" {
@@ -67,6 +88,37 @@ data "vcd_vapp_org_network" "vappOrgNet" {
   org_network_name  = each.value.name
 }
 
+resource "vcd_inserted_media" "media_iso" {
+  for_each    = var.inserted_media_iso_name != "" ? zipmap(var.vm_name, var.vm_name) : {}
+  org         = var.vdc_org_name
+  catalog     = var.boot_catalog_name
+  name        = var.inserted_media_iso_name
+  vapp_name   = data.vcd_vapp.vapp.name
+  vm_name     = each.value
+
+  eject_force = var.inserted_media_eject_force
+
+  depends_on = [vcd_vapp_vm.vm]
+}
+
+resource "vcd_vm_internal_disk" "internal_disk" {
+  for_each   = { for idx, disk in var.internal_disks : idx => disk }
+  org        = var.vdc_org_name
+  vdc        = var.vdc_name
+  vapp_name  = data.vcd_vapp.vapp.name
+  vm_name    = each.value.vm_name
+  size_in_mb = each.value.size_in_mb
+
+  bus_number       = each.value.bus_number
+  unit_number      = each.value.unit_number
+  bus_type         = each.value.bus_type
+  iops             = each.value.iops
+  storage_profile  = each.value.storage_profile
+  allow_vm_reboot  = var.vm_internal_disk_allow_vm_reboot
+
+  depends_on = [vcd_vapp_vm.vm]
+}
+
 resource "vcd_vapp_vm" "vm" {
   for_each = { for i in range(var.vm_count) : i => i }
   org                     = var.vdc_org_name
@@ -74,11 +126,25 @@ resource "vcd_vapp_vm" "vm" {
   vapp_name               = data.vcd_vapp.vapp.name
   name                    = var.vm_name_format != "" ? format(var.vm_name_format, var.vm_name[each.key % length(var.vm_name)], each.key + 1) : var.vm_name[each.key % length(var.vm_name)]
   computer_name           = var.computer_name_format != "" ? format(var.computer_name_format, var.computer_name[each.key % length(var.computer_name)], each.key + 1) : var.computer_name[each.key % length(var.computer_name)]
-  vapp_template_id        = data.vcd_catalog_vapp_template.template.id
+  vapp_template_id        = length(var.catalog_template_name) > 0 ? data.vcd_catalog_vapp_template.template[0].id : null
   cpu_hot_add_enabled     = var.vm_cpu_hot_add_enabled
   memory_hot_add_enabled  = var.vm_memory_hot_add_enabled
   sizing_policy_id        = data.vcd_vm_sizing_policy.sizing_policy.id
   cpus                    = var.vm_min_cpu
+  os_type                 = var.vm_os_type
+  hardware_version        = var.vm_hw_version
+  firmware                = var.vm_firmware
+
+  boot_options {
+    boot_delay          = var.vm_boot_delay
+    boot_retry_enabled  = var.vm_boot_retry_enabled
+    boot_retry_delay    = var.vm_boot_retry_delay
+    efi_secure_boot     = var.vm_efi_secure_boot
+    enter_bios_setup_on_next_boot = var.vm_enter_bios_setup_on_next_boot
+
+  }
+
+  boot_image_id = var.boot_iso_image_name != "" ? data.vcd_catalog_media.boot_image_iso[0].id : null
 
   dynamic "metadata_entry" {
     for_each              = var.vm_metadata_entries
