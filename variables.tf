@@ -213,7 +213,6 @@ variable "vm_disks" {
 variable "internal_disks" {
   description = "List of internal disks for each VM"
   type = list(object({
-    vm_name         = string
     size_in_mb      = number
     bus_number      = number
     unit_number     = number
