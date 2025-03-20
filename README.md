@@ -24,9 +24,9 @@ This Module depends on a vApp already being created in your Virtual Data Center.
 | [vcd_catalog_vapp_template](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/catalog_vapp_template) | data source |
 | [vcd_catalog_media](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/catalog_media) | data source |
 | [vcd_vapp](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/vapp) | data source |
+| [vcd_vapp_org_network](https://registry.terraform.io/providers/vmware/vcd/latest/docs/data-sources/vapp_org_network) | data source |
 | [vcd_inserted_media](https://registry.terraform.io/providers/vmware/vcd/latest/docs/resources/inserted_media) | resource |
 | [vcd_vm_internal_disk](https://registry.terraform.io/providers/vmware/vcd/latest/docs/resources/vm_internal_disk) | resource |
-| [vcd_vapp_org_network](https://registry.terraform.io/providers/vmware/vcd/latest/docs/resources/vapp_org_network) | resource |
 | [vcd_vapp_vm](https://registry.terraform.io/providers/vmware/vcd/latest/docs/resources/vapp_vm) | resource |
 
 ## Inputs
