@@ -91,6 +91,7 @@ data "vcd_vapp_org_network" "vappOrgNet" {
 resource "vcd_inserted_media" "media_iso" {
   for_each    = var.inserted_media_iso_name != "" ? zipmap(var.vm_name, var.vm_name) : {}
   org         = var.vdc_org_name
+  vdc         = var.vdc_name
   catalog     = var.boot_catalog_name
   name        = var.inserted_media_iso_name
   vapp_name   = data.vcd_vapp.vapp.name
