@@ -86,6 +86,8 @@ This Module depends on a vApp already being created in your Virtual Data Center.
 | vm_customization_number_of_auto_logons | Number of auto logons | number | `0` | no |
 | vm_customization_join_domain | Join VMs to domain | bool | `false` | no |
 | vm_customization_initscript | Init script for VMs | string | `null` | no |
+| enable_guest_properties | Boolean to enable or disable the use of guest properties for VMs | bool | false | no |
+| guest_properties_map | A map of guest property key-value pairs to apply to each VM. | map(string) | {} | no |
 
 `NOTE:` Each object in the `vm_metadata_entries` list must have the following attributes:
 

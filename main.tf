@@ -151,6 +151,8 @@ resource "vcd_vapp_vm" "vm" {
   hardware_version        = var.vm_hw_version
   firmware                = var.vm_firmware
 
+  guest_properties = var.enable_guest_properties ? var.guest_properties_map : {}
+
   boot_options {
     boot_delay          = var.vm_boot_delay
     boot_retry_enabled  = var.vm_boot_retry_enabled
