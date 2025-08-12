@@ -63,7 +63,7 @@ This Module depends on a vApp already being created in your Virtual Data Center.
 | vm_firmware | VM firmware type (BIOS or UEFI) | string | `"bios"` | no |
 | vm_boot_delay | Boot delay in milliseconds | number | `0` | no |
 | vm_boot_retry_enabled | Enable boot retry | bool | `false` | no |
-| vm_boot_retry_delay | Boot retry delay in milliseconds | number | `0` | no |
+| vm_boot_retry_delay | Boot retry delay in milliseconds | number | `10` | no |
 | vm_efi_secure_boot | Enable EFI secure boot | bool | `false` | no |
 | vm_enter_bios_setup_on_next_boot | Enter BIOS setup on next boot | bool | `false` | no |
 | vm_count | Number of VMs to create | number | `2` | no |
