@@ -164,7 +164,7 @@ variable "vm_boot_retry_enabled" {
 
 variable "vm_boot_retry_delay" {
   type    = number
-  default = 0
+  default = 10
 }
 
 variable "vm_efi_secure_boot" {
