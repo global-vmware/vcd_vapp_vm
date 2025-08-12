@@ -113,7 +113,7 @@ The Terraform code example for the main.tf file is below:
 
 ```terraform
 module "vcd_vapp_vm" {
-  source                            = "github.com/global-vmware/vcd_vapp_vm.git?ref=v3.0.1"
+  source                            = "github.com/global-vmware/vcd_vapp_vm.git?ref=v3.0.3"
 
   vdc_org_name                      = "<US1-VDC-ORG-NAME>"
   vdc_group_name                    = "<US1-VDC-GRP-NAME>"
